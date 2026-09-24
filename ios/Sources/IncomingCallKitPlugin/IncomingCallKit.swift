@@ -139,6 +139,39 @@ public final class IncomingCallKit: NSObject {
         }
     }
 
+    /// Native entry for the app's PushKit handler. iOS requires the call to be
+    /// reported to CallKit in the same run-loop turn as the VoIP push delivery,
+    /// before the app's WebView or the Capacitor bridge exist on a cold start,
+    /// so this must be callable from Swift without a plugin call. Runs inline
+    /// when already on the main thread. A later `showIncomingCall` from JS for
+    /// the same `callId` resolves to this entry instead of ringing twice.
+    public func reportIncomingCall(
+        callId: String,
+        callerName: String,
+        handle: String?,
+        hasVideo: Bool,
+        extra: [String: Any],
+        timeoutMs: Double = 60_000,
+        completion: ((Error?) -> Void)? = nil
+    ) {
+        let request = IncomingCallRequest(
+            callId: callId,
+            callerName: callerName,
+            handle: handle,
+            hasVideo: hasVideo,
+            timeoutMs: timeoutMs,
+            extra: extra,
+            supportsHolding: true,
+            supportsDTMF: false,
+            supportsGrouping: false,
+            supportsUngrouping: false,
+            handleType: .generic
+        )
+        showIncomingCall(request) { result in
+            if case .failure(let error) = result { completion?(error) } else { completion?(nil) }
+        }
+    }
+
     func endCall(callId: String, reason: String?) {
         onMain {
             guard let entry = self.callsById[callId] else {
