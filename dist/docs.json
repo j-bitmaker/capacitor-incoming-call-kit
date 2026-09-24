@@ -1,0 +1,735 @@
+{
+  "api": {
+    "name": "IncomingCallKitPlugin",
+    "slug": "incomingcallkitplugin",
+    "docs": "Capacitor API for presenting a native incoming-call surface.",
+    "tags": [],
+    "methods": [
+      {
+        "name": "showIncomingCall",
+        "signature": "(options: ShowIncomingCallOptions) => Promise<ShowIncomingCallResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "ShowIncomingCallOptions"
+          }
+        ],
+        "returns": "Promise<ShowIncomingCallResult>",
+        "tags": [],
+        "docs": "Displays the native incoming call UI.\n\nAndroid shows a high-priority notification and can raise a full-screen activity.\niOS reports the call to CallKit.",
+        "complexTypes": [
+          "ShowIncomingCallResult",
+          "ShowIncomingCallOptions"
+        ],
+        "slug": "showincomingcall"
+      },
+      {
+        "name": "endCall",
+        "signature": "(options: EndCallOptions) => Promise<ActiveCallsResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "EndCallOptions"
+          }
+        ],
+        "returns": "Promise<ActiveCallsResult>",
+        "tags": [],
+        "docs": "Ends a specific tracked call.",
+        "complexTypes": [
+          "ActiveCallsResult",
+          "EndCallOptions"
+        ],
+        "slug": "endcall"
+      },
+      {
+        "name": "endAllCalls",
+        "signature": "(options?: EndAllCallsOptions | undefined) => Promise<ActiveCallsResult>",
+        "parameters": [
+          {
+            "name": "options",
+            "docs": "",
+            "type": "EndAllCallsOptions | undefined"
+          }
+        ],
+        "returns": "Promise<ActiveCallsResult>",
+        "tags": [],
+        "docs": "Ends every tracked call.",
+        "complexTypes": [
+          "ActiveCallsResult",
+          "EndAllCallsOptions"
+        ],
+        "slug": "endallcalls"
+      },
+      {
+        "name": "getActiveCalls",
+        "signature": "() => Promise<ActiveCallsResult>",
+        "parameters": [],
+        "returns": "Promise<ActiveCallsResult>",
+        "tags": [],
+        "docs": "Returns the currently tracked calls.",
+        "complexTypes": [
+          "ActiveCallsResult"
+        ],
+        "slug": "getactivecalls"
+      },
+      {
+        "name": "checkPermissions",
+        "signature": "() => Promise<IncomingCallPermissionStatus>",
+        "parameters": [],
+        "returns": "Promise<IncomingCallPermissionStatus>",
+        "tags": [],
+        "docs": "Returns the current permission state for notifications and full-screen intents.",
+        "complexTypes": [
+          "IncomingCallPermissionStatus"
+        ],
+        "slug": "checkpermissions"
+      },
+      {
+        "name": "requestPermissions",
+        "signature": "() => Promise<IncomingCallPermissionStatus>",
+        "parameters": [],
+        "returns": "Promise<IncomingCallPermissionStatus>",
+        "tags": [],
+        "docs": "Requests the notification permission when the platform supports it.\n\niOS CallKit itself does not require a runtime prompt, so iOS resolves without prompting.",
+        "complexTypes": [
+          "IncomingCallPermissionStatus"
+        ],
+        "slug": "requestpermissions"
+      },
+      {
+        "name": "requestFullScreenIntentPermission",
+        "signature": "() => Promise<IncomingCallPermissionStatus>",
+        "parameters": [],
+        "returns": "Promise<IncomingCallPermissionStatus>",
+        "tags": [],
+        "docs": "Opens the Android 14+ full-screen intent settings page when available.\n\nOn other platforms this resolves with the current permission status.",
+        "complexTypes": [
+          "IncomingCallPermissionStatus"
+        ],
+        "slug": "requestfullscreenintentpermission"
+      },
+      {
+        "name": "getPluginVersion",
+        "signature": "() => Promise<PluginVersionResult>",
+        "parameters": [],
+        "returns": "Promise<PluginVersionResult>",
+        "tags": [],
+        "docs": "Returns the native implementation version marker.",
+        "complexTypes": [
+          "PluginVersionResult"
+        ],
+        "slug": "getpluginversion"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'incomingCallDisplayed', listenerFunc: (event: IncomingCallEvent) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'incomingCallDisplayed'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(event: IncomingCallEvent) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "Fired after the call has been handed to the native platform UI.",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "IncomingCallEvent"
+        ],
+        "slug": "addlistenerincomingcalldisplayed-"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'callAccepted', listenerFunc: (event: IncomingCallEvent) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'callAccepted'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(event: IncomingCallEvent) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "Fired when the user accepts the call from native UI.",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "IncomingCallEvent"
+        ],
+        "slug": "addlistenercallaccepted-"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'callDeclined', listenerFunc: (event: IncomingCallEvent) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'callDeclined'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(event: IncomingCallEvent) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "Fired when the user declines the call from native UI.",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "IncomingCallEvent"
+        ],
+        "slug": "addlistenercalldeclined-"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'callEnded', listenerFunc: (event: IncomingCallEvent) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'callEnded'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(event: IncomingCallEvent) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "Fired when a call ends through the API or a platform action.",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "IncomingCallEvent"
+        ],
+        "slug": "addlistenercallended-"
+      },
+      {
+        "name": "addListener",
+        "signature": "(eventName: 'callTimedOut', listenerFunc: (event: IncomingCallEvent) => void) => Promise<PluginListenerHandle>",
+        "parameters": [
+          {
+            "name": "eventName",
+            "docs": "",
+            "type": "'callTimedOut'"
+          },
+          {
+            "name": "listenerFunc",
+            "docs": "",
+            "type": "(event: IncomingCallEvent) => void"
+          }
+        ],
+        "returns": "Promise<PluginListenerHandle>",
+        "tags": [],
+        "docs": "Fired when an unanswered call reaches its configured timeout.",
+        "complexTypes": [
+          "PluginListenerHandle",
+          "IncomingCallEvent"
+        ],
+        "slug": "addlistenercalltimedout-"
+      },
+      {
+        "name": "removeAllListeners",
+        "signature": "() => Promise<void>",
+        "parameters": [],
+        "returns": "Promise<void>",
+        "tags": [],
+        "docs": "Removes every native listener registered by the plugin.",
+        "complexTypes": [],
+        "slug": "removealllisteners"
+      }
+    ],
+    "properties": []
+  },
+  "interfaces": [
+    {
+      "name": "ShowIncomingCallResult",
+      "slug": "showincomingcallresult",
+      "docs": "Result payload for `showIncomingCall()`.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "call",
+          "tags": [],
+          "docs": "The call record that was created or reused.",
+          "complexTypes": [
+            "IncomingCallRecord"
+          ],
+          "type": "IncomingCallRecord"
+        }
+      ]
+    },
+    {
+      "name": "IncomingCallRecord",
+      "slug": "incomingcallrecord",
+      "docs": "Represents a currently tracked call.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "callId",
+          "tags": [],
+          "docs": "Stable call identifier provided by your app.",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "callerName",
+          "tags": [],
+          "docs": "Name shown in the native UI.",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "handle",
+          "tags": [],
+          "docs": "Secondary handle shown by the platform when available.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "hasVideo",
+          "tags": [],
+          "docs": "Whether this call should be treated as a video call.",
+          "complexTypes": [],
+          "type": "boolean"
+        },
+        {
+          "name": "state",
+          "tags": [],
+          "docs": "Current platform-reported call state.",
+          "complexTypes": [
+            "IncomingCallState"
+          ],
+          "type": "IncomingCallState"
+        },
+        {
+          "name": "platform",
+          "tags": [],
+          "docs": "Platform that produced the record.",
+          "complexTypes": [],
+          "type": "'android' | 'ios' | 'web'"
+        },
+        {
+          "name": "extra",
+          "tags": [],
+          "docs": "Arbitrary metadata passed in at call creation time.",
+          "complexTypes": [
+            "Record"
+          ],
+          "type": "Record<string, any>"
+        }
+      ]
+    },
+    {
+      "name": "ShowIncomingCallOptions",
+      "slug": "showincomingcalloptions",
+      "docs": "Common options used to present an incoming call.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "callId",
+          "tags": [],
+          "docs": "Stable identifier for the call.\n\nReuse the same value when ending the call later.",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "callerName",
+          "tags": [],
+          "docs": "Primary name shown to the user.",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "handle",
+          "tags": [],
+          "docs": "Optional secondary handle such as a phone number, SIP URI, or user ID.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "appName",
+          "tags": [],
+          "docs": "Label shown by Android in notifications.\n\niOS uses the app display name configured in the host app bundle.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "hasVideo",
+          "tags": [],
+          "docs": "Whether the incoming session should be marked as video-capable.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "timeoutMs",
+          "tags": [],
+          "docs": "Best-effort timeout in milliseconds.\n\nDefaults to `60000`.",
+          "complexTypes": [],
+          "type": "number | undefined"
+        },
+        {
+          "name": "acceptText",
+          "tags": [],
+          "docs": "Custom label for the accept action.\n\nAndroid only.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "declineText",
+          "tags": [],
+          "docs": "Custom label for the decline action.\n\nAndroid only.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "extra",
+          "tags": [],
+          "docs": "Arbitrary JSON metadata echoed back in all events.",
+          "complexTypes": [
+            "Record"
+          ],
+          "type": "Record<string, any>"
+        },
+        {
+          "name": "android",
+          "tags": [],
+          "docs": "Android-specific behavior overrides.",
+          "complexTypes": [
+            "AndroidIncomingCallOptions"
+          ],
+          "type": "AndroidIncomingCallOptions"
+        },
+        {
+          "name": "ios",
+          "tags": [],
+          "docs": "iOS-specific behavior overrides.",
+          "complexTypes": [
+            "IOSIncomingCallOptions"
+          ],
+          "type": "IOSIncomingCallOptions"
+        }
+      ]
+    },
+    {
+      "name": "AndroidIncomingCallOptions",
+      "slug": "androidincomingcalloptions",
+      "docs": "Android-specific incoming call presentation options.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "channelId",
+          "tags": [],
+          "docs": "Notification channel identifier.\n\nDefaults to `incoming_call_kit`.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "channelName",
+          "tags": [],
+          "docs": "Notification channel display name.\n\nDefaults to `Incoming Calls`.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "showFullScreen",
+          "tags": [],
+          "docs": "Whether Android should request full-screen presentation when possible.\n\nDefaults to `true`.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "accentColor",
+          "tags": [],
+          "docs": "Optional accent color in `#RRGGBB` or `#AARRGGBB` form.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "ringtoneUri",
+          "tags": [],
+          "docs": "Optional ringtone URI string.\n\nExample: `android.resource://com.example.app/raw/ringtone`",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "isHighPriority",
+          "tags": [],
+          "docs": "Whether to mark the notification as high priority.\n\nDefaults to `true`.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        }
+      ]
+    },
+    {
+      "name": "IOSIncomingCallOptions",
+      "slug": "iosincomingcalloptions",
+      "docs": "iOS-specific incoming call presentation options.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "handleType",
+          "tags": [],
+          "docs": "CallKit handle type.\n\nDefaults to `generic`.",
+          "complexTypes": [],
+          "type": "'generic' | 'phoneNumber' | 'emailAddress' | undefined"
+        },
+        {
+          "name": "supportsHolding",
+          "tags": [],
+          "docs": "Whether the call should support hold.\n\nDefaults to `true`.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "supportsDTMF",
+          "tags": [],
+          "docs": "Whether the call should support DTMF.\n\nDefaults to `false`.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "supportsGrouping",
+          "tags": [],
+          "docs": "Whether the call should support grouping.\n\nDefaults to `false`.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "supportsUngrouping",
+          "tags": [],
+          "docs": "Whether the call should support ungrouping.\n\nDefaults to `false`.",
+          "complexTypes": [],
+          "type": "boolean | undefined"
+        }
+      ]
+    },
+    {
+      "name": "ActiveCallsResult",
+      "slug": "activecallsresult",
+      "docs": "Result payload for `getActiveCalls()`.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "calls",
+          "tags": [],
+          "docs": "Calls still tracked by the native implementation.",
+          "complexTypes": [
+            "IncomingCallRecord"
+          ],
+          "type": "IncomingCallRecord[]"
+        }
+      ]
+    },
+    {
+      "name": "EndCallOptions",
+      "slug": "endcalloptions",
+      "docs": "Options for ending a single tracked call.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "callId",
+          "tags": [],
+          "docs": "The call identifier originally passed to `showIncomingCall()`.",
+          "complexTypes": [],
+          "type": "string"
+        },
+        {
+          "name": "reason",
+          "tags": [],
+          "docs": "Optional application-defined reason string.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "EndAllCallsOptions",
+      "slug": "endallcallsoptions",
+      "docs": "Options for ending all tracked calls.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "reason",
+          "tags": [],
+          "docs": "Optional application-defined reason string.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        }
+      ]
+    },
+    {
+      "name": "IncomingCallPermissionStatus",
+      "slug": "incomingcallpermissionstatus",
+      "docs": "Result payload for permission checks.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "notifications",
+          "tags": [],
+          "docs": "Notification permission state.\n\niOS CallKit itself does not require runtime notification permission, so iOS returns `notApplicable`.",
+          "complexTypes": [
+            "PermissionState"
+          ],
+          "type": "PermissionState | 'notApplicable'"
+        },
+        {
+          "name": "fullScreenIntent",
+          "tags": [],
+          "docs": "Full-screen intent permission state.\n\niOS returns `notApplicable`. Android 13 and below resolve this as `granted`.",
+          "complexTypes": [
+            "PermissionState"
+          ],
+          "type": "PermissionState | 'notApplicable'"
+        }
+      ]
+    },
+    {
+      "name": "PluginVersionResult",
+      "slug": "pluginversionresult",
+      "docs": "Plugin version payload.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "version",
+          "tags": [],
+          "docs": "Version identifier returned by the platform implementation.",
+          "complexTypes": [],
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "PluginListenerHandle",
+      "slug": "pluginlistenerhandle",
+      "docs": "",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "remove",
+          "tags": [],
+          "docs": "",
+          "complexTypes": [],
+          "type": "() => Promise<void>"
+        }
+      ]
+    },
+    {
+      "name": "IncomingCallEvent",
+      "slug": "incomingcallevent",
+      "docs": "Payload delivered by plugin listeners.",
+      "tags": [],
+      "methods": [],
+      "properties": [
+        {
+          "name": "call",
+          "tags": [],
+          "docs": "The call that triggered the event.",
+          "complexTypes": [
+            "IncomingCallRecord"
+          ],
+          "type": "IncomingCallRecord"
+        },
+        {
+          "name": "reason",
+          "tags": [],
+          "docs": "Optional reason for the state transition.",
+          "complexTypes": [],
+          "type": "string | undefined"
+        },
+        {
+          "name": "source",
+          "tags": [],
+          "docs": "Origin of the action.",
+          "complexTypes": [],
+          "type": "'api' | 'user' | 'system'"
+        }
+      ]
+    }
+  ],
+  "enums": [],
+  "typeAliases": [
+    {
+      "name": "IncomingCallState",
+      "slug": "incomingcallstate",
+      "docs": "Supported incoming call states.",
+      "types": [
+        {
+          "text": "'ringing'",
+          "complexTypes": []
+        },
+        {
+          "text": "'accepted'",
+          "complexTypes": []
+        },
+        {
+          "text": "'ended'",
+          "complexTypes": []
+        }
+      ]
+    },
+    {
+      "name": "Record",
+      "slug": "record",
+      "docs": "Construct a type with a set of properties K of type T",
+      "types": [
+        {
+          "text": "{\r\n    [P in K]: T;\r\n}",
+          "complexTypes": [
+            "K",
+            "T"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PermissionState",
+      "slug": "permissionstate",
+      "docs": "",
+      "types": [
+        {
+          "text": "'prompt'",
+          "complexTypes": []
+        },
+        {
+          "text": "'prompt-with-rationale'",
+          "complexTypes": []
+        },
+        {
+          "text": "'granted'",
+          "complexTypes": []
+        },
+        {
+          "text": "'denied'",
+          "complexTypes": []
+        }
+      ]
+    }
+  ],
+  "pluginConfigs": []
+}

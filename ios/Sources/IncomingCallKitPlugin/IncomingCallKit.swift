@@ -91,8 +91,17 @@ public final class IncomingCallKit: NSObject {
         eventDispatcher = nil
     }
 
+    /// Runs `block` inline when already on the main thread. `showIncomingCall`
+    /// depends on it: iOS requires `reportNewIncomingCall` in the same run-loop
+    /// turn as `pushRegistry(_:didReceiveIncomingPushWith:for:completion:)`; a
+    /// deferred dispatch there gets the app terminated on a cold start
+    /// ("Killing app because it never posted an incoming call").
+    private func onMain(_ block: @escaping () -> Void) {
+        if Thread.isMainThread { block() } else { DispatchQueue.main.async(execute: block) }
+    }
+
     func showIncomingCall(_ request: IncomingCallRequest, completion: @escaping (Result<IncomingCallEntry, Error>) -> Void) {
-        DispatchQueue.main.async {
+        onMain {
             if let existing = self.callsById[request.callId] {
                 completion(.success(existing))
                 return
@@ -131,7 +140,7 @@ public final class IncomingCallKit: NSObject {
     }
 
     func endCall(callId: String, reason: String?) {
-        DispatchQueue.main.async {
+        onMain {
             guard let entry = self.callsById[callId] else {
                 return
             }
